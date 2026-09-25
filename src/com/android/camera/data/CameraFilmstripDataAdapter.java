@@ -248,7 +248,9 @@ public class CameraFilmstripDataAdapter implements LocalFilmstripDataAdapter {
 
         if ((oldPos != -1) && (oldPos != pos)) {
             Log.v(TAG, "found duplicate data: " + uri);
-            removeAt(oldPos);
+            // This only removes a duplicate list entry, not the saved photo.
+            FilmstripItem duplicate = mFilmstripItems.remove(oldPos);
+            mListener.onFilmstripItemRemoved(oldPos, duplicate);
         }
     }
 
